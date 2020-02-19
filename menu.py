@@ -1,5 +1,5 @@
-from PIL import Image
-from tkinter import Tk
+from PIL import Image, ImageTk
+from tkinter import Tk, Label, Button
 from tkinter.filedialog import askopenfilename
 from basic_functions import *
 from export import export

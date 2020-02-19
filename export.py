@@ -1,7 +1,8 @@
 import basic_functions
+from PIL import Image
 
 # Supported image file formats
-file_formats = ["png", "jpg"]
+file_formats = [".png", ".jpg"]
 
 # Export image
 def export(img):
@@ -16,12 +17,21 @@ def export(img):
                 img.save(name)
                 break
             else:
-                user_format = input("Enter export format: ")
-                if user_format.lower() in file_formats:
-                    img.save(name + "." + user_format.lower())
+                user_format = input("Enter export format: ").lower()
+                if user_format in file_formats:
+                    if user_format == ".jpg":
+                        img = img.convert("RGB")
+                        img.save(name + user_format)
+                    elif user_format == ".png":
+                        img = img.cenvert("RGBA")
+                        img.save(name + user_format)
+                    break
 
     elif save_decision == "N":
         exit()
     else:
         print("Answer with Y or N")
         export(img)
+
+def convert_channels(format, img):
+
