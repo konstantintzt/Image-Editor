@@ -5,6 +5,7 @@ This is a test project and is NOT stable.
 ## Features
  - Grayscale
  - Resize
+ - Gaussian blur
 
 ## Updates
 Stay tuned for updates, as lots of new features and improvements should arrive!

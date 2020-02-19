@@ -14,7 +14,7 @@ def get_image():
 
 # Terminal menu
 def menu(img):
-    print("Welcome to Broksy Image Editor v1.0!\nPlease chose a mode from the list below:\n\n1: Grayscale\n2: Resize")
+    print("Welcome to Broksy Image Editor v1.0!\nPlease chose a mode from the list below:\n\n1: Grayscale\n2: Resize\n3: Gaussian blur")
     user_mode = input()
     if user_mode == "1":
         print("Grayscale mode")
@@ -25,6 +25,10 @@ def menu(img):
         x = int(input("X: "))
         y = int(input("Y: "))
         img = resize(img, (x,y))
+    elif user_mode == "3":
+        print("Gaussian blur mode")
+        radius = int(input("Enter radius: "))
+        img = gaussianBlur(img, radius)
     img.show()
     export(img)
 
