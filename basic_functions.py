@@ -1,4 +1,5 @@
 from PIL import ImageFilter
+from PIL import Image
 
 # Basic features of the editor
 
@@ -14,4 +15,21 @@ def resize(im):
 
 def gaussianBlur(im, radius):
     im = im.filter(ImageFilter.GaussianBlur(radius))
+    return im
+
+def invertColors(im):
+
+    current_pixel = []
+
+    for x in range(im.size[0]):
+        for y in range(im.size[1]):
+
+            current_pixel = list(im.getpixel((x, y)))
+            
+            current_pixel[0] = abs(255-current_pixel[0])
+            current_pixel[1] = abs(255-current_pixel[1])
+            current_pixel[2] = abs(255-current_pixel[2])
+
+            im.putpixel((x,y), tuple(current_pixel))
+
     return im

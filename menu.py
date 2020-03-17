@@ -25,7 +25,12 @@ def menu(img):
         print("Gaussian blur mode")
         radius = int(input("Enter radius: "))
         img = gaussianBlur(img, radius)
+    elif user_mode == "4":
+        print("TEST MODE")
+        invertColors(img)
+
     img.show()
     export(img)
+
 image = get_image()
 menu(image)
