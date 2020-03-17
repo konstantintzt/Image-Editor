@@ -4,7 +4,6 @@ from tkinter.filedialog import askopenfilename
 from basic_functions import *
 from export import export
 
-
 # Tkinter dialog to chose file
 def get_image():
     Tk().withdraw()
@@ -21,16 +20,12 @@ def menu(img):
         img = grayscale(img)
     elif user_mode == "2":
         print("Resize mode")
-        print("Enter new dimensions")
-        x = int(input("X: "))
-        y = int(input("Y: "))
-        img = resize(img, (x,y))
+        img = resize(img)
     elif user_mode == "3":
         print("Gaussian blur mode")
         radius = int(input("Enter radius: "))
         img = gaussianBlur(img, radius)
     img.show()
     export(img)
-
 image = get_image()
 menu(image)

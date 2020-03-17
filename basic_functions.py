@@ -6,8 +6,10 @@ def grayscale(im):
     im = im.convert("L")
     return im
 
-def resize(im, new_size):
-    im = im.resize(new_size)
+def resize(im):
+    x = int(input("Enter new X size: "))
+    y = int(input("Enter new Y size: "))
+    im = im.resize((x,y))
     return im
 
 def gaussianBlur(im, radius):
