@@ -7,6 +7,7 @@ Keep in my that the project is not very optimized yet.
  - Resize
  - Gaussian blur
  - Color inversion
+ - Color to transparency
 
 ## Updates
 Stay tuned for updates, as lots of new features and improvements should arrive!
