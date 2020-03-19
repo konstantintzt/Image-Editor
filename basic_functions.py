@@ -39,8 +39,6 @@ def colorToTransparency(im):
     color_to_change = tuple(map(int,input("Enter color to be changed to transparency: [R,G,B]").split(",")))
     print("Color to change is:", color_to_change)
 
-    print(im.getpixel((20,20)))
-
     for x in range(im.size[0]):
         for y in range(im.size[1]):
             current_pixel = im.getpixel((x, y))
