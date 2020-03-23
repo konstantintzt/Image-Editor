@@ -1,74 +1,102 @@
 from PIL import Image, ImageTk
-from tkinter import Tk, Label, Button, Canvas
+from tkinter import Tk, Label, Button, Canvas, Toplevel
 from tkinter.filedialog import askopenfilename
-from basic_functions import *
+import basic_functions
 from export import export
 
 img = None
 app_title = "Broksy Image Editor v0.1"
-
+root = None
+tk_im = None
 
 # Tkinter dialog to chose file
-def get_image(ok):
-    global img
+def get_image():
     Tk().withdraw()
     filepath = askopenfilename()
     img = Image.open(filepath)
-    ok.quit()
-    ok.destroy()
+    tk_im = ImageTk.PhotoImage(img)
+    return img, tk_im
 
-# Terminal menu
-def terminal_menu():
-    #img = get_image()
+def display_image(im, canvas):
+
+    global tk_im
+    global image_window
+    canvas.pack(side="top",fill="both",expand="yes")
+    canvas.create_image(im.size[0]/2+10, im.size[1]/2+10, image=tk_im)
+
+
+def grayscale():
+
+    global tk_im
     global img
-    print("Welcome to Broksy Image Editor v1.0!\nPlease chose a mode from the list below:\n\n1: Grayscale\n2: Resize\n3: Gaussian blur\n4: Color inversion\n5: Color to transparency")
-    user_mode = input()
-    if user_mode == "1":
-        print("Grayscale mode")
-        img = grayscale(img)
-    elif user_mode == "2":
-        print("Resize mode")
-        img = resize(img)
-    elif user_mode == "3":
-        print("Gaussian blur mode")
-        img = gaussianBlur(img)
-    elif user_mode == "4":
-        print("Color inversion mode")
-        img = invertColors(img)
-    elif user_mode == "5":
-        print("Color to transparency mode")
-        img = colorToTransparency(img)
-    else:
-        print("Invalid mode!")
-        exit()
-    img.show()
-    export(img)
-    
-def image_selection_menu():
+    global canvas
+    img = basic_functions.grayscale(img)
+    tk_im = ImageTk.PhotoImage(img)
+    canvas.delete("all")
+    display_image(img, canvas)
 
-    root = Tk()
-    root.geometry('500x500')
-    root.title(app_title)
+def resize():
+    global tk_im
+    global img
+    global canvas
+    img = basic_functions.resize(img)
+    tk_im = ImageTk.PhotoImage(img)
+    canvas.delete("all")
+    display_image(img, canvas)
 
-    image_button = Button(root, command= lambda: get_image(root), font="Arial", text="Open image")
-    image_button.pack()
-    root.mainloop()
+def gaussian_blur():
+    global tk_im
+    global img
+    global canvas
+    img = basic_functions.gaussianBlur(img)
+    tk_im = ImageTk.PhotoImage(img)
+    canvas.delete("all")
+    display_image(img, canvas)
 
-def image_actions_menu(im):
+def invert_colors():
 
-    root = Tk()
-    root.geometry(str(im.size[0]+20)+"x"+str(im.size[1]+20))
-    root.resizable(False, False)
-    root.title(app_title)
+    global tk_im
+    global img
+    global canvas
+    img = basic_functions.invertColors(img)
+    tk_im = ImageTk.PhotoImage(img)
+    canvas.delete("all")
+    display_image(img, canvas)
 
-    im_tkinter = ImageTk.PhotoImage(im)
+def color_to_transparency():
+    global tk_im
+    global img
+    global canvas
+    img = basic_functions.colorToTransparency(img)
+    tk_im = ImageTk.PhotoImage(img)
+    canvas.delete("all")
+    display_image(img, canvas)
 
-    canvas = Canvas()
-    canvas.pack()
-    canvas.create_image(im.size[0]/2+10, im.size[1]/2+10, image=im_tkinter,)
 
-    root.mainloop()
+root = Tk()
+root.geometry("200x200")
+root.title(app_title)
 
-image_selection_menu()
-image_actions_menu(img)
-#terminal_menu()
+button = Button(master=root, command=grayscale, text="Grayscale")
+button.pack()
+button = Button(master=root, command=resize, text="Resize")
+button.pack()
+button = Button(master=root, command=gaussian_blur, text="Gaussian blur")
+button.pack()
+button = Button(master=root, command=invert_colors, text="Color inversion")
+button.pack()
+button = Button(master=root, command=color_to_transparency, text="Color to transparency")
+button.pack()
+button = Button(master=root, command= lambda: export(img), text="Save")
+button.pack()
+
+# Variables for PIL image and image for Tkinter canvas
+img,tk_im = get_image()
+
+image_window = Toplevel()
+image_window.title(app_title)
+image_window.geometry(str(img.size[0]+20)+"x"+str(img.size[1]+20))
+canvas = Canvas(master=image_window)
+display_image(img, canvas)
+
+root.mainloop()

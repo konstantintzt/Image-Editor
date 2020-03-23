@@ -6,7 +6,7 @@ file_formats = (".png", ".jpg")
 
 # Export image
 def export(img):
-
+    
     save_decision = input("Would you like to save the file? (Y/N)").upper()
 
     if save_decision == "Y":
@@ -16,6 +16,7 @@ def export(img):
             save_with_format(name, img)
         else:
             save_without_format(name, img)
+        exit()
 
     elif save_decision == "N":
         exit()

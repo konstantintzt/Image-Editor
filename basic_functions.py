@@ -1,12 +1,11 @@
 from PIL import ImageFilter
 from PIL import Image
-
 # Basic features of the editor
 
 def grayscale(im):
     im = im.convert("L")
+    im = im.convert("RGBA")
     return im
-
 def resize(im):
     x = int(input("Enter new X size: "))
     y = int(input("Enter new Y size: "))
@@ -29,8 +28,9 @@ def invertColors(im):
             current_pixel[1] = abs(255-current_pixel[1])
             current_pixel[2] = abs(255-current_pixel[2])
             im.putpixel((x,y), tuple(current_pixel))
-            
+
     return im
+            
 
 def colorToTransparency(im):
 
@@ -44,5 +44,5 @@ def colorToTransparency(im):
             current_pixel = im.getpixel((x, y))
             if current_pixel[0] == color_to_change[0] and current_pixel[1] == color_to_change[1] and current_pixel[2] == color_to_change[2]:
                 im.putpixel((x,y), (0,0,0,0))
-    
+
     return im
