@@ -1,6 +1,8 @@
 # Image-Editor
-Image Editor is a simple image editor written in Python using PIL for image manipulation. For now, it's using a simple terminal UI, but a GUI could come later on.
-Keep in my that the project is not very optimized yet.
+Image Editor is a simple image editor written in Python using PIL for image manipulation. It is using a Tkinter GUI.
+
+## New!
+A simple Tkinter GUI is now available. Please keep in mind that the code is very unstable and errors are likely to happen.
 
 ## Features
  - Grayscale
@@ -10,4 +12,4 @@ Keep in my that the project is not very optimized yet.
  - Color to transparency
 
 ## Updates
-Stay tuned for updates, as lots of new features and improvements should arrive!
+The next update will be focused on adding more image editing features. GUI stabilization is scheduled for a future update.
