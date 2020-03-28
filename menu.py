@@ -5,7 +5,7 @@ import basic_functions
 from export import export
 
 img = None
-app_title = "Broksy Image Editor v0.1"
+app_title = "Broksy Image Editor v0.25"
 root = None
 tk_im = None
 color = (255,255,255)
@@ -135,8 +135,8 @@ button = Button(master=root, command=color_to_transparency, text="Color to trans
 button.pack()
 button = Button(master=root, command= lambda: export(img), text="Save")
 button.pack()
-button = Button(master=root, command=draw_mode, text="Draw")
-button.pack()
+#button = Button(master=root, command=draw_mode, text="Draw")
+#button.pack()
 button = Button(master=root, command=text_mode, text="Text")
 button.pack()
 button = Button(master=root, command=color_picker, text="Color picker")

@@ -1,8 +1,8 @@
 # Image-Editor
 Image Editor is a simple image editor written in Python using PIL for image manipulation. It is using a Tkinter GUI.
 
-## New!
-A simple Tkinter GUI is now available. Please keep in mind that the code is very unstable and errors are likely to happen.
+## New! Version 0.25
+The color picker is finally here! You can also add text to your images!
 
 ## Features
  - Grayscale
@@ -10,6 +10,9 @@ A simple Tkinter GUI is now available. Please keep in mind that the code is very
  - Gaussian blur
  - Color inversion
  - Color to transparency
+ - Add text
+ - Color picker
 
 ## Updates
-The next update will be focused on adding more image editing features. GUI stabilization is scheduled for a future update.
+Update 0.3 will focus on implementing drawing. For v0.4, error handling and GUI stabilization are scheduled.
+Stay tuned!
