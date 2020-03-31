@@ -1,5 +1,5 @@
 from PIL import Image, ImageTk
-from tkinter import Tk, Label, Button, Canvas, Toplevel, simpledialog
+from tkinter import Tk, Label, Button, Canvas, Toplevel, simpledialog, messagebox
 from tkinter.filedialog import askopenfilename
 import basic_functions
 from export import export
@@ -24,6 +24,7 @@ def display_image(im, canvas):
 
     global tk_im
     global image_window
+    image_window.geometry(str(img.size[0])+"x"+str(img.size[1]))
     canvas.pack(side="top",fill="both",expand="yes")
     canvas.create_image(im.size[0]/2, im.size[1]/2, image=tk_im)
 
@@ -67,14 +68,12 @@ def add_text(event):
 def first_drawing_point(event):
     global first_point
     first_point = (event.x, event.y)
-    print("Point 1:", event.x, event.y)
     if second_point != ():
         draw_line(img)
 
 def second_drawing_point(event):
     global second_point 
     second_point = (event.x, event.y)
-    print("Point 2:", event.x, event.y)
     if first_point != ():
         draw_line(img)
 
@@ -86,7 +85,6 @@ def draw_line(im):
     global second_point
     global color
 
-    print(first_point[0], first_point[1], "->", second_point[0], second_point[1])
     img = basic_functions.draw_line(img, first_point[0], first_point[1], second_point[0], second_point[1], color)
 
     first_point = ()
@@ -101,6 +99,7 @@ def pick_color(event):
     global color
 
     color = basic_functions.pick_color(img, event.x, event.y)
+    messagebox.showinfo(title=app_title, message=str("Selected RGBA color is: "+str(color)))
 
 def grayscale():
 
@@ -190,6 +189,7 @@ try:
     image_window = Toplevel()
     image_window.title(app_title)
     image_window.geometry(str(img.size[0])+"x"+str(img.size[1]))
+    image_window.resizable(False, False)
     canvas = Canvas(master=image_window)
     display_image(img, canvas)
 
