@@ -67,3 +67,10 @@ def pick_color(im, x, y):
 
     color = im.getpixel((x,y))
     return color
+
+def draw_line(im, x1, y1, x2, y2, color):
+
+    d = ImageDraw.Draw(im)
+    d.line([(x1, y1), (x2, y2)], fill=color, width=3)
+
+    return im
