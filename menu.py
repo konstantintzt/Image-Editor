@@ -184,12 +184,15 @@ button = Button(master=root, command=color_picker, text="Color picker")
 button.pack()
 
 # Variables for PIL image and image for Tkinter canvas
-img,tk_im = get_image()
+try:
+    img,tk_im = get_image()
 
-image_window = Toplevel()
-image_window.title(app_title)
-image_window.geometry(str(img.size[0])+"x"+str(img.size[1]))
-canvas = Canvas(master=image_window)
-display_image(img, canvas)
+    image_window = Toplevel()
+    image_window.title(app_title)
+    image_window.geometry(str(img.size[0])+"x"+str(img.size[1]))
+    canvas = Canvas(master=image_window)
+    display_image(img, canvas)
 
-root.mainloop()
+    root.mainloop()
+except AttributeError:
+    pass
