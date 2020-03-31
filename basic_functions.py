@@ -5,14 +5,11 @@ def grayscale(im):
     im = im.convert("L")
     im = im.convert("RGBA")
     return im
-def resize(im):
-    x = int(input("Enter new X size: "))
-    y = int(input("Enter new Y size: "))
+def resize(im, x, y):
     im = im.resize((x,y))
     return im
 
-def gaussianBlur(im):
-    radius = int(input("Enter radius: "))
+def gaussianBlur(im, radius):
     im = im.filter(ImageFilter.GaussianBlur(radius))
     return im
 
@@ -34,9 +31,6 @@ def invertColors(im):
 def colorToTransparency(im, color):
 
     im = im.convert("RGBA")
-    
-    #color_to_change = tuple(map(int,input("Enter color to be changed to transparency: [R,G,B] ").split(",")))
-    #print("Color to change is:", color_to_change)
 
     for x in range(im.size[0]):
         for y in range(im.size[1]):

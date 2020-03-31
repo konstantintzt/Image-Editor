@@ -117,7 +117,12 @@ def resize():
     global tk_im
     global img
     global canvas
-    img = basic_functions.resize(img)
+    new_x = simpledialog.askinteger(title=app_title, prompt="Enter new X size:")
+    new_y = simpledialog.askinteger(title=app_title, prompt="Enter new Y size:")
+    try:
+        img = basic_functions.resize(img, new_x, new_y)
+    except TypeError:
+        pass
     tk_im = ImageTk.PhotoImage(img)
     canvas.delete("all")
     display_image(img, canvas)
@@ -126,7 +131,11 @@ def gaussian_blur():
     global tk_im
     global img
     global canvas
-    img = basic_functions.gaussianBlur(img)
+    radius = simpledialog.askinteger(title=app_title, prompt="Enter radius:")
+    try:
+        img = basic_functions.gaussianBlur(img, radius)
+    except TypeError:
+        pass
     tk_im = ImageTk.PhotoImage(img)
     canvas.delete("all")
     display_image(img, canvas)
