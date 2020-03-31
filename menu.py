@@ -101,7 +101,6 @@ def pick_color(event):
     global color
 
     color = basic_functions.pick_color(img, event.x, event.y)
-    print(color)
 
 def grayscale():
 
