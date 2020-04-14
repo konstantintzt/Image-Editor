@@ -115,10 +115,10 @@ def resize():
     global tk_im
     global img
     global canvas
-    new_x = simpledialog.askinteger(title=app_title, prompt="Enter new X size:")
-    new_y = simpledialog.askinteger(title=app_title, prompt="Enter new Y size:")
+    x = simpledialog.askinteger(title=app_title, prompt="Enter new X size:")
+    y = simpledialog.askinteger(title=app_title, prompt="Enter new Y size:")
     try:
-        img = basic_functions.resize(img, new_x, new_y)
+        img = basic_functions.resize(img, x, y)
     except TypeError:
         pass
     tk_im = ImageTk.PhotoImage(img)
