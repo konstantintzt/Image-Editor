@@ -9,8 +9,6 @@ app_title = "Broksy Image Editor v0.25"
 root = None
 tk_im = None
 color = (255,255,255,255)
-first_point = ()
-second_point = ()
 
 # Tkinter dialog to chose file
 def get_image():
@@ -30,8 +28,15 @@ def display_image(im, canvas):
 
 def draw_mode():
     global canvas
-    canvas.bind("<Button 1>", first_drawing_point)
-    canvas.bind("<Button 3>", second_drawing_point)
+    canvas.bind("<Button 1>", draw_point)
+    canvas.bind("<B1-Motion>", draw_curve)
+    canvas.bind("<ButtonRelease-3>", draw_line)
+    canvas.bind("<ButtonPress-3>", draw_line)
+
+def draw_curve(event):
+    global img
+    if (event.x <= img.size[0] and event.y <= img.size[1]):
+        draw_point(event)
 
 def text_mode():
     global canvas
@@ -65,30 +70,21 @@ def add_text(event):
     canvas.delete("all")
     display_image(img, canvas)
 
-def first_drawing_point(event):
-    global first_point
-    first_point = (event.x, event.y)
-    if second_point != ():
-        draw_line(img)
-
-def second_drawing_point(event):
-    global second_point 
-    second_point = (event.x, event.y)
-    if first_point != ():
-        draw_line(img)
-
-def draw_line(im):
+def draw_line(event):
     global tk_im
     global img
     global canvas
-    global first_point
-    global second_point
     global color
 
-    img = basic_functions.draw_line(img, first_point[0], first_point[1], second_point[0], second_point[1], color)
+    if str(event.type) == "ButtonPress":
+       canvas.old_coords = event.x, event.y
+    elif str(event.type) == "ButtonRelease":
+        first_x, first_y = canvas.old_coords
+        second_x = event.x 
+        second_y = event.y
+        img = basic_functions.draw_line(img, first_x, first_y, second_x, second_y, color)
 
-    first_point = ()
-    second_point = ()
+    canvas.delete("all")
 
     tk_im = ImageTk.PhotoImage(img)
     display_image(img, canvas)
@@ -100,6 +96,7 @@ def pick_color(event):
 
     color = basic_functions.pick_color(img, event.x, event.y)
     messagebox.showinfo(title=app_title, message=str("Selected RGBA color is: "+str(color)))
+    canvas.unbind("<Button-1>")
 
 def grayscale():
 
@@ -175,7 +172,7 @@ button = Button(master=root, command=color_to_transparency, text="Color to trans
 button.pack()
 button = Button(master=root, command= lambda: export(img), text="Save")
 button.pack()
-button = Button(master=root, command=draw_mode, text="Draw line")
+button = Button(master=root, command=draw_mode, text="Draw")
 button.pack()
 button = Button(master=root, command=text_mode, text="Text")
 button.pack()
