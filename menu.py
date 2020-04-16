@@ -5,7 +5,7 @@ import basic_functions
 from export import export
 
 img = None
-app_title = "Broksy Image Editor v0.25"
+app_title = "Broksy Image Editor v0.3"
 root = None
 tk_im = None
 color = (255,255,255,255)
